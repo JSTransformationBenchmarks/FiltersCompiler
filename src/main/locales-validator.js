@@ -1,9 +1,5 @@
-const fs_readdirPromise = require('util').promisify(require('fs').readdir);
-
-const fs_readFilePromise = require('util').promisify(require('fs').readFile);
-
 /* eslint-disable global-require */
-module.exports = (async () => {
+module.exports = (() => {
   const fs = require('fs');
 
   const path = require('path');
@@ -41,14 +37,14 @@ module.exports = (async () => {
    * @param filePath - path to locales file
    */
 
-  const readFile = async filePath => await fs_readFilePromise(path.resolve(__dirname, filePath), 'utf8');
+  const readFile = filePath => fs.readFileSync(path.resolve(__dirname, filePath), 'utf8');
   /**
    * Sync reads directory content
    * @param dirPath - path to directory
    */
 
 
-  const readDir = async dirPath => await fs_readdirPromise(path.resolve(__dirname, dirPath), 'utf8');
+  const readDir = dirPath => fs.readdirSync(path.resolve(__dirname, dirPath), 'utf8');
   /**
    * Validates messages keys
    * @param {Array} keys locale messages keys
